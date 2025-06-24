@@ -1,0 +1,23 @@
+# Ignore Python virtual environment
+.venv/
+
+# Ignore environment variable files
+.env
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Ignore Google service account or any service account file
+service_account.json
+service_account.yaml
+service_account/
+
+# Optional: VSCode or other IDE folders
+.vscode/
+.idea/
+
+# Optional: OS/system files
+.DS_Store
+Thumbs.db
