@@ -5,7 +5,6 @@ from gspread_dataframe import set_with_dataframe
 from oauth2client.service_account import ServiceAccountCredentials
 
 def import_sheet(sheet_id):
-    # Define the scope and credentials
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name('service_account.json', scope)
     client = gspread.authorize(creds)

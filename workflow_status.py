@@ -16,16 +16,14 @@ def get_workflow_status(pr_number):
 
     url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/pulls/{pr_number}"
     pr_data = requests.get(url, headers=headers).json()
-    # print(f"Data for PR #{pr_number}: {pr_data}")
 
     if 'head' not in pr_data:
         return "Erreur PR non trouvée"
     
     sha = pr_data["head"]["sha"]
 
-    # Récupérer les workflows associés à ce commit
+    # Récupérer les workflows associés au dernier commit
     runs_url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/actions/runs?head_sha={sha}"
-    # runs_url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/actions/runs?event=pull_request"
     runs_data = requests.get(runs_url, headers=headers).json()
 
     if "workflow_runs" not in runs_data or not runs_data["workflow_runs"]:
@@ -34,10 +32,3 @@ def get_workflow_status(pr_number):
     # Prendre le dernier workflow
     latest_run = runs_data["workflow_runs"][0]
     return latest_run["conclusion"]  # 'success', 'failure', etc.
-
-# def main():
-#     status = get_workflow_status(30)
-#     print(f"Statut du workflow pour la PR #{30} : {status}")
-
-# if __name__ == "__main__":
-#     main()  
