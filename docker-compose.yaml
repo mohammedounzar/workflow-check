@@ -5,3 +5,5 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+    volumes:
+      - .:/app   # <-- mount current host directory into container

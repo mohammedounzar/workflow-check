@@ -24,8 +24,8 @@ def get_workflow_status(pr_number):
     sha = pr_data["head"]["sha"]
 
     # Récupérer les workflows associés à ce commit
-    # runs_url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/actions/runs?head_sha={sha}"
-    runs_url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/actions/runs?event=pull_request"
+    runs_url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/actions/runs?head_sha={sha}"
+    # runs_url = f"https://api.github.com/repos/{REPO_OWNER}/{REPO_NAME}/actions/runs?event=pull_request"
     runs_data = requests.get(runs_url, headers=headers).json()
 
     if "workflow_runs" not in runs_data or not runs_data["workflow_runs"]:
