@@ -35,9 +35,9 @@ def get_workflow_status(pr_number):
     latest_run = runs_data["workflow_runs"][0]
     return latest_run["conclusion"]  # 'success', 'failure', etc.
 
-def main():
-    status = get_workflow_status(30)
-    print(f"Statut du workflow pour la PR #{30} : {status}")
+# def main():
+#     status = get_workflow_status(30)
+#     print(f"Statut du workflow pour la PR #{30} : {status}")
 
-if __name__ == "__main__":
-    main()  
+# if __name__ == "__main__":
+#     main()  
