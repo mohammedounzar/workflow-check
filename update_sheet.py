@@ -9,7 +9,9 @@ def update_sheet(sheet_id, pr_number, status):
     worksheet, df = import_sheet(sheet_id)
     print(f"Sheet ID: {sheet_id}")
 
-    print(df.head(3)) 
+    print(df[['PR Number']].head(3))
+
+    print(f"All PR Numbers in DataFrame: {df['PR Number'].tolist()}")
 
     # Update the DataFrame with the new status
     if pr_number in df['PR Number'].values:
