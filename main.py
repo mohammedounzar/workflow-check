@@ -9,11 +9,14 @@ def main():
     sheet_id = os.getenv("SHEET_ID")
     status = os.getenv("VALIDATION_STATUS")
     pr_number = os.getenv("PR_NUMBER") 
+    print(f"Sheet ID: {sheet_id}, Status: {status}, PR Number: {pr_number}")
+
+    if not all([sheet_id, status, pr_number]):
+        raise ValueError("Missing one or more required environment variables.")
 
     update_sheet(sheet_id, pr_number, status)
 
 if __name__ == "__main__":
-    load_dotenv() 
     try:
         main()
     except Exception as e:
