@@ -1,20 +1,16 @@
-# Use official Python 3.11 slim image
-FROM python:3.11-slim
+FROM python:3.10-slim
 
-# Set working directory inside container
+ARG SHEET_ID
+ARG GOOGLE_CREDS_JSON
+
+ENV SHEET_ID=${SHEET_ID}
+ENV GOOGLE_CREDS_JSON=${GOOGLE_CREDS_JSON}
+ENV WORKFLOW_STATUS=${VALIDATION_OUTCOME}
+ENV PR_NUMBER=${PR_NUMBER}
+
 WORKDIR /app
+COPY . /app
 
-# Copy requirements file first (for caching)
-COPY requirements.txt .
+RUN pip install --upgrade pip && pip install gspread oauth2client
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy all your project files into the container
-COPY . .
-
-# Make sure Python outputs are immediately flushed (good for logs)
-ENV PYTHONUNBUFFERED=1
-
-# Command to run your script
 CMD ["python", "main.py"]
