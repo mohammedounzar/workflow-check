@@ -24,7 +24,7 @@ def update_sheet(sheet_id, pr_number, status):
         else:
             df.loc[df['PR Number'] == pr_number, 'Status automatique'] = "Aucune information"
     else:
-        print(f"PR Number {pr_number} not found in the DataFrame.")
+        return f"PR Number {pr_number} not found in the DataFrame."
 
     set_with_dataframe(worksheet, df)
 
