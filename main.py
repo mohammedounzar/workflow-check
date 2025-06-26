@@ -8,7 +8,7 @@ import time
 def main():
     sheet_id = os.getenv("SHEET_ID")
     status = os.getenv("VALIDATION_STATUS")
-    pr_number = os.getenv("PR_NUMBER") 
+    pr_number = int(os.getenv("PR_NUMBER"))
     print(f"Sheet ID: {sheet_id}, Status: {status}, PR Number: {pr_number}")
 
     if not all([sheet_id, status, pr_number]):
