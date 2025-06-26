@@ -7,6 +7,9 @@ from import_sheet import import_sheet
 
 def update_sheet(sheet_id, pr_number, status):
     worksheet, df = import_sheet(sheet_id)
+    print(f"Sheet ID: {sheet_id}")
+
+    print(df.head(3))  # Display the first few rows of the DataFrame for debugging
 
     # Update the DataFrame with the new status
     if pr_number in df['PR Number'].values:
