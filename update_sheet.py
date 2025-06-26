@@ -13,7 +13,7 @@ def update_sheet(sheet_id, pr_number, status):
 
     print(f"All PR Numbers in DataFrame: {df['PR Number'].tolist()}")
 
-    print(f"The type of pr_number given as input: {pr_number.dtype()}")
+    print(f"The type of pr_number given as input: {type(pr_number)}")
 
     # Update the DataFrame with the new status
     if pr_number in df['PR Number'].values:
