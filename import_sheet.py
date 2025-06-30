@@ -15,5 +15,6 @@ def import_sheet(sheet_id):
 
     df['Status automatique'] = df['Status automatique'].astype('object')
     df['PR Number'] = df['PR Number'].astype(int)
+    df['Message en cas de problème'] = df['Message en cas de problème'].astype('object')
 
     return worksheet, df
