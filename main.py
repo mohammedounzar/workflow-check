@@ -6,7 +6,7 @@ def main():
     status = os.getenv("VALIDATION_STATUS")
     error_msg = os.getenv("ERROR_MSG")
     pr_number = int(os.getenv("PR_NUMBER"))
-    print(f"Sheet ID: {sheet_id}, Status: {status}, PR Number: {pr_number}")
+    print(f"Sheet ID: {sheet_id}, Status: {status}, PR Number: {pr_number}, Error Message: {error_msg}")
 
     if not all([sheet_id, status, pr_number]):
         raise ValueError("Missing one or more required environment variables.")
