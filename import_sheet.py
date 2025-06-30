@@ -1,8 +1,5 @@
-import os
 import gspread
-import pandas as pd
 from gspread_dataframe import get_as_dataframe
-from gspread_dataframe import set_with_dataframe
 from oauth2client.service_account import ServiceAccountCredentials
 
 def import_sheet(sheet_id):

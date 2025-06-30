@@ -1,9 +1,5 @@
-from import_sheet import import_sheet
 from update_sheet import update_sheet
-from workflow_status import get_workflow_status
-from dotenv import load_dotenv
 import os
-import time
 
 def main():
     sheet_id = os.getenv("SHEET_ID")

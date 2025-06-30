@@ -1,9 +1,0 @@
-version: "3.9"
-services:
-  pr-checker:
-    build: .
-    restart: unless-stopped
-    env_file:
-      - .env
-    volumes:
-      - .:/app   # <-- mount current host directory into container

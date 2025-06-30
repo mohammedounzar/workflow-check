@@ -1,13 +1,5 @@
-# 🚀 PR Monitoring
+# 🚀 Workflow Checker
 
-This project monitors GitHub Pull Requests (PRs) for a specified repository and updates a Google Sheet with the status of each PR's workflow.
+This project monitors GitHub Pull Requests (PRs) for a specified repository and updates a Google Sheet with the status of each PR's workflow. you can integrate it directly in your validation Github Actions workflow.
 
----
 
-## 🐳 Docker
-
-Run the project quickly using Docker:
-
-```sh
-docker build -t pr-monitoring .
-docker-compose up
