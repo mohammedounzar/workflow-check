@@ -1,7 +1,6 @@
 import gspread
 from gspread_dataframe import get_as_dataframe
 from oauth2client.service_account import ServiceAccountCredentials
-import re
 
 def import_sheet(sheet_id, sheet_name):
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -16,6 +15,12 @@ def import_sheet(sheet_id, sheet_name):
     for ws in worksheets:
         norm_title = ws.title.lower().replace('-', '').replace(' ', '')
         if norm_pattern in norm_title:
-            return ws
+            df = get_as_dataframe(ws)
+            df['Status automatique'] = df['Status automatique'].astype('object')
+            df['PR Number'] = df['PR Number'].astype(int)
+            df['Message en cas de problème'] = df['Message en cas de problème'].astype('object')
+            print(f"Found worksheet: {ws.title}")
+            print(f"DataFrame first rows: {df.head()}")
+            return ws, df
     
     raise ValueError(f"No worksheet found matching pattern '{sheet_name}'")
