@@ -6,6 +6,8 @@ def main():
     status = os.getenv("VALIDATION_STATUS")
     error_msg = os.getenv("ERROR_MSG")
     pr_number = int(os.getenv("PR_NUMBER"))
+    github_token = os.getenv("GITHUB_TOKEN")
+    
     print(f"Sheet ID: {sheet_id}, Status: {status}, PR Number: {pr_number}, Error Message: {error_msg}")
 
     if not all([sheet_id, status, pr_number]):

@@ -2,8 +2,8 @@ from gspread_dataframe import set_with_dataframe
 from import_sheet import import_sheet
 from extract_ticket_and_sheet import extract_ticket_and_sheet
 
-def update_sheet(sheet_id, pr_number, status, error_msg):
-    ticket_nbr, sheet_name = extract_ticket_and_sheet(pr_number) 
+def update_sheet(sheet_id, pr_number, status, error_msg, github_token):
+    ticket_nbr, sheet_name = extract_ticket_and_sheet(pr_number, github_token) 
     worksheet, df = import_sheet(sheet_id, sheet_name)
 
     # Update the DataFrame with the new status

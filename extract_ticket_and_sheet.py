@@ -3,11 +3,10 @@ import os
 from dotenv import load_dotenv
 import re
 
-def extract_ticket_and_sheet(pr_number):
+def extract_ticket_and_sheet(pr_number, github_token):
     load_dotenv()
     repo_name = os.getenv("REPO_NAME")
     repo_owner = os.getenv("REPO_OWNER")
-    github_token = os.getenv("GITHUB_TOKEN")
 
     headers = {
         'Authorization': f'token {github_token}',
