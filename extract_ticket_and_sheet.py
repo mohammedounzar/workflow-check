@@ -4,15 +4,11 @@ from dotenv import load_dotenv
 import re
 
 def extract_ticket_and_sheet(pr_number, github_token):
-    load_dotenv()
-    repo_name = os.getenv("REPO_NAME")
-    repo_owner = os.getenv("REPO_OWNER")
 
     headers = {
         'Authorization': f'token {github_token}',
         'Accept': 'application/vnd.github.v3+json'}
     url = f'https://api.github.com/repos/moulineE/gitActionTestProject/pulls/{pr_number}/commits'
-    print(f"Fetching commits for PR #{pr_number} in {repo_owner}/{repo_name}")
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
@@ -21,7 +17,7 @@ def extract_ticket_and_sheet(pr_number, github_token):
     else:
         print(f"Error {response.status_code}: {response.text}")
 
-    commit_msg = data[-1]['commit']['msg']
+    commit_msg = data[-1]['commit']['message']
 
     print(f"Commit msg: {commit_msg}")
 
