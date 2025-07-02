@@ -12,6 +12,7 @@ def extract_ticket_and_sheet(pr_number, github_token):
         'Authorization': f'token {github_token}',
         'Accept': 'application/vnd.github.v3+json'}
     url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/pulls/{pr_number}/commits'
+    print(f"Fetching commits for PR #{pr_number} in {repo_owner}/{repo_name}")
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
