@@ -8,7 +8,7 @@ def extract_ticket_and_sheet(pr_number, github_token):
     headers = {
         'Authorization': f'token {github_token}',
         'Accept': 'application/vnd.github.v3+json'}
-    url = f'https://api.github.com/repos/moulineE/gitActionTestProject/pulls/{pr_number}/commits'
+    url = f'https://api.github.com/repos/moulineE/gitActionTestProject/pulls/{pr_number}/commits?per_page=100'
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
