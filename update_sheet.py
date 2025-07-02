@@ -6,7 +6,6 @@ def update_sheet(sheet_id, pr_number, status, error_msg, github_token):
     ticket_nbr, sheet_name = extract_ticket_and_sheet(pr_number, github_token) 
     worksheet, df = import_sheet(sheet_id, sheet_name)
 
-    # Update the DataFrame with the new status
     if ticket_nbr in df['Numéro de ticket'].values:
         df.loc[df['Numéro de ticket'] == ticket_nbr, "Message en cas de problème"] = error_msg
         if status == "success":
