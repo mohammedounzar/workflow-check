@@ -1,5 +1,4 @@
 gspread
 oauth2client
 gspread_dataframe
-dotenv
 requests

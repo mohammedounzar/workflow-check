@@ -1,6 +1,4 @@
 import requests
-import os
-from dotenv import load_dotenv
 import re
 
 def extract_ticket_and_sheet(pr_number, github_token):
