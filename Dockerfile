@@ -9,5 +9,8 @@ COPY . .
 
 ENV PYTHONUNBUFFERED=1
 
-#CMD
-ENTRYPOINT ["python", "main.py"] 
+#CMD ["python", "main.py"]
+# CMD is overridden by default when you pass arguments to docker run
+
+ENTRYPOINT ["python", "main.py"]  
+# ENTRYPOINT is not overridden by default when you pass arguments to docker run
