@@ -10,14 +10,15 @@ def import_sheet(sheet_id, sheet_name):
     sheet = client.open_by_key(sheet_id)
     worksheets = sheet.worksheets()  
     
-    norm_pattern = sheet_name.lower().replace('-', '').replace(' ', '')  # 24-06-2025-EBS-Release 7.0.1
+    norm_pattern = sheet_name.lower().replace('-', '').replace(' ', '')  # 24-06-2025-EBS-Release7.0.1
     
     for ws in worksheets:
-        norm_title = ws.title.lower().replace('-', '').replace(' ', '')
+        norm_title = ws.title.lower().replace('-', '').replace(' ', '')  # 24-06-2025-ebsrelease7.0.1
         if norm_pattern in norm_title:
             df = get_as_dataframe(ws)
             df['Status automatique'] = df['Status automatique'].astype('object')
             df['PR Number'] = df['PR Number'].astype(int)
+            print(f"PR Number type : {df['PR Number'].dtype}")
             df['Message en cas de problème'] = df['Message en cas de problème'].astype('object')
             print(f"Found worksheet: {ws.title}")
             print(f"DataFrame first rows: {df.head()}")
