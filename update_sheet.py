@@ -8,6 +8,7 @@ def update_sheet(sheet_id, pr_number, status, error_msg, github_token, repo_name
 
     if ticket_nbr in df['Numéro de ticket'].values:
         df.loc[df['Numéro de ticket'] == ticket_nbr, "Message en cas de problème"] = error_msg
+        df.loc[df['Numéro de ticket'] == ticket_nbr, "PR Number"] = pr_number
         if status == "success":
             df.loc[df['Numéro de ticket'] == ticket_nbr, 'Status automatique'] = "Validé"
         elif status == "failure":
