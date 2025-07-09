@@ -10,7 +10,7 @@ def import_sheet(sheet_id, sheet_name):
     sheet = client.open_by_key(sheet_id)
     worksheets = sheet.worksheets()  
     
-    norm_pattern = sheet_name.lower().replace('-', '').replace(' ', '')  # 24-06-2025-EBS-Release7.0.1
+    norm_pattern = sheet_name.lower().replace('-', '').replace(' ', '')  # release-7.0.1
     
     for ws in worksheets:
         norm_title = ws.title.lower().replace('-', '').replace(' ', '')  # 24-06-2025-ebsrelease7.0.1
