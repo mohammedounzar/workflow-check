@@ -8,9 +8,9 @@ def import_sheet(sheet_id, sheet_name):
     client = gspread.authorize(creds)
     
     sheet = client.open_by_key(sheet_id)
-    worksheets = sheet.worksheets()
+    worksheets = sheet.worksheets()  
     
-    norm_pattern = sheet_name.lower().replace('-', '').replace(' ', '')
+    norm_pattern = sheet_name.lower().replace('-', '').replace(' ', '')  # 24-06-2025-EBS-Release 7.0.1
     
     for ws in worksheets:
         norm_title = ws.title.lower().replace('-', '').replace(' ', '')

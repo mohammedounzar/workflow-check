@@ -15,17 +15,18 @@ def extract_ticket_and_sheet(pr_number, github_token, repo_name, repo_owner):
     else:
         print(f"Error {response.status_code}: {response.text}")
 
-    commit_msg = data[-1]['commit']['message']
+    commit_msg = data[-1]['commit']['message']  # [release-1.2.3] EEV2-1234
 
     print(f"Commit msg: {commit_msg}")
 
-    ticket_nbr = re.findall(r'\bEEV2-\d+\b', commit_msg)
+    ticket_nbr = re.findall(r'\bEEV2-\d+\b', commit_msg.upper().replace(' ', ''))  #  EEV2-1234  
+
     if ticket_nbr:
         print(f"Ticket number found: {ticket_nbr[0]}")
     else:
         raise ValueError("No valid ticket number found in commit message.")
     
-    sheet_name = re.findall(r'\brelease-\d+\.\d+\.\d+\b', commit_msg)
+    sheet_name = re.findall(r'\brelease-\d+\.\d+\.\d+\b', commit_msg.lower().replace(' ', ''))
     if sheet_name:  
         print(f"Sheet name found: {sheet_name[0]}")
     else:
