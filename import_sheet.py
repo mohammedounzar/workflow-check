@@ -17,8 +17,12 @@ def import_sheet(sheet_id, sheet_name):
         if norm_pattern in norm_title:
             df = get_as_dataframe(ws)
             df['Status automatique'] = df['Status automatique'].astype('object')
-            df['PR Number'] = df['PR Number'].astype(int)
-            print(f"PR Number type : {df['PR Number'].dtype}")
+            try:
+                df['PR Number'] = df['PR Number'].astype(int)
+                print(f"PR Number type : {df['PR Number'].dtype}")
+            except ValueError:
+                print("Error converting 'PR Number' to int, keeping as object.")
+                df['PR Number'] = df['PR Number'].astype('object')
             df['Message en cas de problème'] = df['Message en cas de problème'].astype('object')
             print(f"Found worksheet: {ws.title}")
             print(f"DataFrame first rows: {df.head()}")
