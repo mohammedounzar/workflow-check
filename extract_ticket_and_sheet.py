@@ -1,12 +1,12 @@
 import requests
 import re
 
-def extract_ticket_and_sheet(pr_number, github_token):
+def extract_ticket_and_sheet(pr_number, github_token, repo_name, repo_owner):
 
     headers = {
         'Authorization': f'token {github_token}',
         'Accept': 'application/vnd.github.v3+json'}
-    url = f'https://api.github.com/repos/moulineE/gitActionTestProject/pulls/{pr_number}/commits?per_page=100'
+    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/pulls/{pr_number}/commits?per_page=100'
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
