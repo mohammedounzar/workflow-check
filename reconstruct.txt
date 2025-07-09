@@ -1,0 +1,24 @@
+ticket_nbr = ticket_nbr[0]
+
+ticker_nbr = ticket_nbr.upper().replace(' ', '')
+
+
+count_e =count(E)
+if count_e == 1:
+ticket_nbr = "E" + ticker_nbr
+
+if count_e == 3:
+ticket_nbr = ticket_nbr[1:]
+
+count_v = count(V)
+if count_v == 0:
+ticket_nbr = ticket_nbr[:2] + "V" +  ticket_nbr[2:]
+
+if count_v == 2:
+ticket_nbr = ticket_nbr[:3] + ticket_nbr[4:]
+
+
+count__ = count(-)
+if count__ == 0:
+ticket_nbr = ticket_nbr[:4] + "-" + ticket_nbr[5:]
+

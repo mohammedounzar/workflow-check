@@ -17,12 +17,35 @@ def extract_ticket_and_sheet(pr_number, github_token, repo_name, repo_owner):
 
     commit_msg = data[-1]['commit']['message']  # [release-1.2.3] EEV2-1234
 
-    print(f"Commit msg: {commit_msg}")
+    print(f"Commit msg: {commit_msg}")    #  EE2 - 72727    
 
-    ticket_nbr = re.findall(r'\bEEV2-\d+\b', commit_msg.upper().replace(' ', ''))  #  EEV2-1234  
+    ticket_nbr = re.findall(r'\b[E]{1,2}[E]?[V]{0,2}2\s*-?\s*\d+\b', commit_msg, re.IGNORECASE)  #  EEV2-1234  , \bEEV2-\d+\b
 
+    ticket_nbr = ticket_nbr.upper().replace(' ', '')
+
+    ticket_nbr = ticket_nbr[0]
+
+    count_e = ticket_nbr.count('E')
+    if count_e == 1:
+        ticket_nbr = "E" + ticket_nbr
+    
+    elif count_e == 3:
+        ticket_nbr = ticket_nbr[1:]
+    
+    count_v = ticket_nbr.count('V')
+    if count_v == 0:
+        ticket_nbr = ticket_nbr[:2] + 'V' + ticket_nbr[2:]
+
+    elif count_v == 2:
+        ticket_nbr = ticket_nbr[:3] + ticket_nbr[4:]
+    
+    count__ = ticket_nbr.count('-')
+    if count__ == 0:
+        ticket_nbr = ticket_nbr[:4] + "-" + ticket_nbr[5:]
+    # ticker_nbr = [re.sub(r'\s*-\s*', '-',t.upper().replace(' ', '')) for t in ticker_nbr] # rebuild ticket numbers
+    
     if ticket_nbr:
-        print(f"Ticket number found: {ticket_nbr[0]}")
+        print(f"Ticket number found: {ticket_nbr}")
     else:
         raise ValueError("No valid ticket number found in commit message.")
     
