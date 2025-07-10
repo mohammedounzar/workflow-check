@@ -41,7 +41,7 @@ def extract_ticket_and_sheet(pr_number, github_token, repo_name, repo_owner):
     
     count__ = ticket_nbr.count('-')
     if count__ == 0:
-        ticket_nbr = ticket_nbr[:4] + "-" + ticket_nbr[5:]
+        ticket_nbr = ticket_nbr[:4] + "-" + ticket_nbr[4:]
     # ticker_nbr = [re.sub(r'\s*-\s*', '-',t.upper().replace(' ', '')) for t in ticker_nbr] # rebuild ticket numbers
     
     if ticket_nbr:
