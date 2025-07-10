@@ -1,4 +1,5 @@
 import re
+import unittest
 
 def rebuild_ticket_nbr(commit_msg):
     """
@@ -6,6 +7,7 @@ def rebuild_ticket_nbr(commit_msg):
     """
     ticket_nbr = re.findall(r'\b[E]{1,2}[E]?[V]{0,2}2\s*-?\s*\d+\b', commit_msg, re.IGNORECASE)  #  EEV2-1234  , \bEEV2-\d+\b
 
+    print(f"ticket_nbr: {ticket_nbr}")
     # rebuild ticket numbers
 
     ticket_nbr = ticket_nbr[0].upper().replace(' ', '')
