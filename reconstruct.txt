@@ -20,5 +20,5 @@ ticket_nbr = ticket_nbr[:3] + ticket_nbr[4:]
 
 count__ = count(-)
 if count__ == 0:
-ticket_nbr = ticket_nbr[:4] + "-" + ticket_nbr[5:]
+ticket_nbr = ticket_nbr[:4] + "-" + ticket_nbr[4:]
 
