@@ -1,6 +1,6 @@
 from rebuild_ticket_nbr_test import rebuild_ticket_nbr
 
-def test_e2_s_1234():
+def test_e2_space_1234():
     assert rebuild_ticket_nbr("[release-8.2.2] e2 1234") == 'EEV2-1234'
 
 def test_eev2_dash_5678():
