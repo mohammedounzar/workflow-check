@@ -1,5 +1,4 @@
 import re
-import unittest
 
 def rebuild_ticket_nbr(commit_msg):
     """
@@ -7,7 +6,7 @@ def rebuild_ticket_nbr(commit_msg):
     """
     ticket_nbr = re.findall(r'\b[E]{1,2}[E]?[V]{0,2}2\s*-?\s*\d+\b', commit_msg, re.IGNORECASE)  #  EEV2-1234  , \bEEV2-\d+\b
 
-    print(f"ticket_nbr: {ticket_nbr}")
+    print(f"ticket_nbr: {ticket_nbr[0]}")
     # rebuild ticket numbers
 
     ticket_nbr = ticket_nbr[0].upper().replace(' ', '')
@@ -32,5 +31,6 @@ def rebuild_ticket_nbr(commit_msg):
 
     return ticket_nbr
 
-ticket_nbr_result = rebuild_ticket_nbr("[release-8.2.2] e2 1234")
-print(ticket_nbr_result) 
+input = "fixed bug in EEV2 5678"
+result = rebuild_ticket_nbr("fixed bug in EEV2 5678")  # Example usage
+print(f"The result for this input : {input} is {result}")  # Output: EEV2-5678
