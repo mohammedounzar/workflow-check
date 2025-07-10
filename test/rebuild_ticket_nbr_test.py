@@ -24,10 +24,14 @@ def rebuild_ticket_nbr(commit_msg):
 
     elif count_v == 2:
         ticket_nbr = ticket_nbr[:3] + ticket_nbr[4:]
+
+    print(f"ticket_nbr after E and V adjustments: {ticket_nbr}")
     
     count__ = ticket_nbr.count('-')
     if count__ == 0:
-        ticket_nbr = ticket_nbr[:4] + "-" + ticket_nbr[5:]
+        ticket_nbr = ticket_nbr[:4] + "-" + ticket_nbr[4:]
+    
+    print(f"The result for this input : {commit_msg} is {ticket_nbr}")
 
     return ticket_nbr
 
