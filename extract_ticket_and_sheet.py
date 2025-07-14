@@ -60,7 +60,7 @@ def extract_ticket_and_sheet(pr_number, github_token, repo_name, repo_owner):
         sheet_name = "release" + "-" + sheet_name[7:]
 
     if sheet_name:  
-        print(f"Sheet name found: {sheet_name[0]}")
+        print(f"Sheet name found: {sheet_name}")
     else:
         raise ValueError("No valid sheet name found in commit message.")
     
