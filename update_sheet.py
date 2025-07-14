@@ -19,5 +19,3 @@ def update_sheet(sheet_id, pr_number, status, error_msg, github_token, repo_name
         return f"Numéro de ticket {ticket_nbr} not found in the DataFrame."
 
     set_with_dataframe(worksheet, df)
-
-    print("Sheet updated successfully.")
