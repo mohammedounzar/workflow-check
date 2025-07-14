@@ -49,9 +49,15 @@ def extract_ticket_and_sheet(pr_number, github_token, repo_name, repo_owner):
     else:
         raise ValueError("No valid ticket number found in commit message.")
     
-    sheet_name = re.findall(r'\brelease-\d+\.\d+\.\d+\b', commit_msg)  # release-1.2.3   
+    sheet_name = re.findall(r'\brelease\s*-?\s*\d+\.\d+\.\d+\b', commit_msg)  # release-1.2.3   
 
-    # sheet_name = sheet_name[0].upper().replace(' ', '')
+    sheet_name = sheet_name[0].lower().replace(' ', '')
+
+    sheet_name = sheet_name[0]
+
+    count__sn = sheet_name.count("-")    
+    if count__sn == 0:   # release1.2.3 
+        sheet_name = "release" + "-" + sheet_name[7:]
 
     if sheet_name:  
         print(f"Sheet name found: {sheet_name[0]}")
