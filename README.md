@@ -1,59 +1,66 @@
-# Setup
+# 📝 Workflow-Check: Google Sheets Updater for GitHub Actions
 
-## 📌 Project Overview
+Automate the update of a Google Spreadsheet with your CI/CD workflow results, PR numbers, and error messages—directly from GitHub Actions. No more manual reporting!
 
-This project automates the update of a Google Spreadsheet using data from a GitHub Actions workflow. It pushes CI/CD workflow statuses, test results, and error messages directly to a Google Sheet—removing the need for manual reporting and improving visibility for your team.
+---
+
+## 🚀 Features
+
+- **Automatic Google Sheet updates** after each workflow run
+- **Pull Request info extraction** (ticket number, release name)
+- **Error message logging** from your workflow
+- **Dockerized** for easy integration in CI/CD
+- **Secure**: uses GitHub Secrets and Google Service Account
+
+---
+
+## 📦 Project Structure
+
+```
+.
+├── Dockerfile
+├── extract_ticket_and_sheet.py
+├── import_sheet.py
+├── main.py
+├── requirements.txt
+├── update_sheet.py
+└── README.md
+```
 
 ---
 
 ## 🛠 Prerequisites
 
-- A Google Cloud Platform (GCP) project
-- A Google Sheet (for reporting)
-- A GitHub repository with CI/CD workflows
-- Docker installed (for running the updater)
-- Basic knowledge of GitHub Actions
+- Google Cloud Platform project with Sheets API enabled
+- Google Sheet (shared with your service account)
+- GitHub repository with Actions workflows
+- Docker installed
 
 ---
 
-## 🔐 Step 1: Google Sheets API Setup
+## 🔐 Google Sheets API Setup
 
-1. Visit [Google Cloud Console](https://console.cloud.google.com/).
-2. Create or select a project.
-3. Go to **APIs & Services → Library**.
-4. Enable the **Google Sheets API**.
-5. Go to **APIs & Services → Credentials**.
-6. Click **Create Credentials → Service Account**.
-7. Finish the setup, then:
-   - Go to the **Keys** tab
-   - Click **Add Key → Create new key → JSON**
-   - Download the JSON file (this is your credentials file)
+1. Go to [Google Cloud Console](https://console.cloud.google.com/).
+2. Create/select a project.
+3. Enable the **Google Sheets API**.
+4. Create a **Service Account** and download the JSON key.
+5. Share your Google Sheet with the service account email (Editor access).
 
 ---
 
-## 📄 Step 2: Share the Spreadsheet
+## 🔑 GitHub Secrets
 
-1. Open your spreadsheet in Google Sheets.
-2. Click **Share**.
-3. Use the email from your service account JSON (ends in `@<project>.iam.gserviceaccount.com`) and give it **Editor** access.
+In your GitHub repo, add these secrets:
 
----
-
-## 🔑 Step 3: Add GitHub Secrets
-
-In your GitHub repo:
-
-1. Go to **Settings → Secrets and variables → Actions**.
-2. Add the following secrets:
-   - `GOOGLE_CREDENTIALS`: Content of your service account JSON
-   - `SHEET_ID`: The ID from your Google Sheets URL
-   - `GH_AUTH_TOKEN`: A GitHub token with the right permissions
+- `GOOGLE_CREDENTIALS`: Content of your service account JSON
+- `SHEET_ID`: Your Google Sheet ID (from the URL)
+- `GH_AUTH_TOKEN`: GitHub token with repo access
 
 ---
 
-## 🧪 Step 4: Update GitHub Workflow
+## ⚙️ Usage in GitHub Actions
 
-Add the following steps to your GitHub Actions workflow:
+Add these steps to your workflow:
 
 ### 1. Extract Error Messages
 
@@ -65,17 +72,19 @@ Add the following steps to your GitHub Actions workflow:
       grep "Error in" validate_output.txt || echo "No error message"
       echo "EOF"
     } >> $GITHUB_ENV
+```
 
 ### 2. Clone the Updater Repo
 
 ```yaml
 - name: Clone Spreadsheet Updater Repo
   run: git clone https://github.com/mohammedounzar/workflow-check.git
+```
 
 ### 3. Build & Run Docker Container
 
 ```yaml
-- name: UPDATE Sprint spreadsheet using Docker
+- name: Update Sprint Spreadsheet
   env:
     GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
     SHEET_ID: ${{ secrets.SHEET_ID }}
@@ -83,6 +92,8 @@ Add the following steps to your GitHub Actions workflow:
     VALIDATION_STATUS: ${{ steps.validation.outcome }}
     ERROR_MSG: ${{ env.ERROR_MSG || 'No error message' }}
     GITHUB_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
+    REPO_NAME: ${{ github.event.repository.name }}
+    REPO_OWNER: ${{ github.repository_owner }}
   run: |
     echo "$GOOGLE_CREDENTIALS" > /tmp/service_account.json
 
@@ -94,15 +105,57 @@ Add the following steps to your GitHub Actions workflow:
       -e PR_NUMBER="$PR_NUMBER" \
       -e ERROR_MSG="$ERROR_MSG" \
       -e GITHUB_TOKEN="$GITHUB_TOKEN" \
+      -e REPO_NAME="$REPO_NAME" \
+      -e REPO_OWNER="$REPO_OWNER" \
       -v /tmp/service_account.json:/app/service_account.json \
       update-sheet-app
+```
 
-## Result
+---
 
-Once configured, your GitHub workflow will automatically:
+## 🧩 How It Works
 
-1. Log validation status
+1. **Extracts** ticket number and release name from the latest PR commit.
+2. **Finds** the correct worksheet in your Google Sheet.
+3. **Updates** the row for the ticket with PR number, status, and error message.
 
-2. Extract any error messages
+---
 
-3. Update the corresponding row in your sprint Google Sheet
+## 🧪 Local Testing
+
+Install dependencies:
+
+```sh
+pip install -r requirements.txt
+```
+
+Run manually:
+
+```sh
+export SHEET_ID=...
+export VALIDATION_STATUS=success
+export ERROR_MSG="No error"
+export PR_NUMBER=123
+export REPO_NAME=your-repo
+export REPO_OWNER=your-org
+export GITHUB_TOKEN=ghp_...
+python main.py
+```
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+## 🤝 Contributing
+
+Pull requests welcome! Please open an issue first to discuss changes.
+
+---
+
+## 📬 Contact
+
+For questions, open an issue or
