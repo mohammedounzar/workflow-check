@@ -143,19 +143,3 @@ python main.py
 ```
 
 ---
-
-## 📄 License
-
-MIT License
-
----
-
-## 🤝 Contributing
-
-Pull requests welcome! Please open an issue first to discuss changes.
-
----
-
-## 📬 Contact
-
-For questions, open an issue or
