@@ -1,5 +1,5 @@
 import pytest
-from parse_commit_message import CommitMessageParser
+from parse_commit_message import parse_commit_message
 
 @pytest.mark.parametrize("input_str, expected", [
     # Standard case
@@ -37,4 +37,4 @@ from parse_commit_message import CommitMessageParser
 ])
 
 def test_rebuild_ticket_nbr(input_str, expected):
-    assert CommitMessageParser(input_str).parse_commit_message() == expected
+    assert parse_commit_message(input_str) == expected

@@ -1,20 +1,11 @@
 import requests
-import re
-from parse_commit_message import CommitMessageParser
+from parse_commit_message import parse_commit_message
 
-
-class TicketAndSheetExtractor:
-    def __init(self, pr_number, github_token, repo_name, repo_owner):
-        self.pr_number = pr_number
-        self.github_token = github_token
-        self.repo_name = repo_name
-        self.repo_owner = repo_owner
-
-    def extract_ticket_and_sheet(self):
+def extract_ticket_and_sheet(pr_number, github_token, repo_name, repo_owner):
         headers = {
-            'Authorization': f'token {self.github_token}',
+            'Authorization': f'token {github_token}',
             'Accept': 'application/vnd.github.v3+json'}
-        url = f'https://api.github.com/repos/{self.repo_owner}/{self.repo_name}/pulls/{self.pr_number}/commits?per_page=100'
+        url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/pulls/{pr_number}/commits?per_page=100'
         response = requests.get(url, headers=headers)
 
         if response.status_code == 200:
@@ -27,6 +18,6 @@ class TicketAndSheetExtractor:
 
         print(f"Commit msg: {commit_msg}")    #  EE2 - 72727    
 
-        ticket_nbr, sheet_name = CommitMessageParser(commit_msg).parse_commit_message()
+        ticket_nbr, sheet_name = parse_commit_message(commit_msg)
 
         return ticket_nbr, sheet_name
