@@ -5,6 +5,7 @@ __pycache__/
 *.py[cod]
 *.pyo
 .pytest_cache/
+.vscode/
 
 service_account.json
 
