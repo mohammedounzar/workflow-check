@@ -18,7 +18,6 @@ def import_sheet(sheet_id, sheet_name):
             df = get_as_dataframe(ws)
             df['Status automatique'] = df['Status automatique'].astype('object')
             df['Message en cas de problème'] = df['Message en cas de problème'].astype('object')
-            print(f"Found worksheet: {ws.title}")
             return ws, df
     
     raise ValueError(f"No worksheet found matching pattern '{sheet_name}'")

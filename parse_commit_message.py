@@ -36,7 +36,6 @@ def parse_commit_message(commit_msg):
 
     count__sn = sheet_name.count("-")    
     if count__sn == 0:   # release1.2.3 
-        print(f"Release number found: {sheet_name[7:]}")
         sheet_name = "release" + "-" + sheet_name[7:]
 
     if sheet_name:  

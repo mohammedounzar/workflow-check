@@ -10,8 +10,6 @@ def main():
     repo_owner = os.getenv("REPO_OWNER")
     github_token = os.getenv("GITHUB_TOKEN")
 
-    print(f"Sheet ID: {sheet_id}, Status: {status}, PR Number: {pr_number}, Error Message: {error_msg}")
-
     if not all([sheet_id, status, pr_number, error_msg, repo_name, repo_owner, github_token]):
         raise ValueError("Missing one or more required environment variables.")
 

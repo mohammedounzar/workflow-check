@@ -6,8 +6,6 @@ COPY . /app
 
 RUN pip install --upgrade pip
 
-RUN pip install --no-cache-dir -r requirements.txt
-
-ENV PYTHONUNBUFFERED=1
+RUN pip install -r requirements.txt
 
 CMD ["python", "main.py"]
